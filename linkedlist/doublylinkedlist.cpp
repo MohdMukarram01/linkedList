@@ -7,7 +7,7 @@ class Node{
 		Node* prev;
 		Node* next;
 		
-		Node(int d){
+		~Node(int d){
 			this->data=d;
 			this->prev=NULL;
 			this->next=NULL;
@@ -65,6 +65,31 @@ void insertatposition(Node* &tail,Node* &head,int position,int value)
 		temp->next=newnode;
 		newnode->prev=temp;
 }
+void deletehead(Node* &head,int position)
+{
+	if(position==1){
+		Node* temp=head;
+		temp->next->prev=NULL;
+		head=temp->next;
+		temp->next=NULL;
+	}
+	else{
+		Node* curr=head;
+		Node* prev=NULL;
+		int cnt=1;
+		
+		while(cnt < position)
+		{
+			prev=curr;
+			curr=curr->next;
+			cnt++;
+		}
+		prev->next=curr->next;
+		curr->next=NULL;
+		delete curr;
+	}
+}
+
 
 int main(){
 	Node* node1=new Node(10);
