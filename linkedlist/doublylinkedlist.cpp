@@ -65,7 +65,7 @@ void insertatposition(Node* &tail,Node* &head,int position,int value)
 		temp->next=newnode;
 		newnode->prev=temp;
 }
-void deletehead(Node* &head,int position)
+void deleteposition(Node* &head,int position)
 {
 	if(position==1){
 		Node* temp=head;
@@ -101,5 +101,7 @@ int main(){
 	insertatend(tail,15);
 	print(head);
 	insertatposition(tail,head,1,11);
+	print(head);
+	deleteposition(head,2);
 	print(head);
 }
