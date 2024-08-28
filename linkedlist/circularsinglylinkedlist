@@ -1,0 +1,99 @@
+#include<iostream>
+using namespace std;
+
+class Node{
+	public:
+		int data;
+		Node* next;
+		
+		Node(int d)
+		{
+			this->data=d;
+			this->next=NULL;
+		}
+		
+		~Node(){
+			int val= this->data;
+			if(this->next != NULL){
+				delete next;
+				this->next=NULL;
+			}
+		}
+		
+};
+
+void insertnode(Node* &tail,int element,int value)
+{
+	if(tail == NULL)
+	{
+		Node* newnode=new Node(value);
+		tail=newnode;
+		newnode->next=newnode;
+	}
+	else{
+		Node* curr=tail;
+		
+		while(curr->data != element){
+			curr=curr->next;
+		}
+		
+		Node* newnode=new Node(value);
+		newnode->next=curr->next;
+		curr->next=newnode;
+	}
+}
+void deleteNode(Node* &tail,int element)
+{
+   if(tail == NULL){
+   	cout<<"list is empty,please check again"<<endl;
+   	return;
+   }
+   else{
+   	    Node* prev=tail;
+   	    Node* curr=prev->next;
+   	    while(curr->data != element)
+   	    {
+   	    	prev=curr;
+   	    	curr=curr->next;
+		}
+		prev->next=curr->next;
+		// 1 node linked list
+		if(curr==prev){
+			tail=NULL;
+		}
+		if(tail == curr)
+		{
+			tail=prev;
+		}
+		curr->next=NULL;
+		delete curr;
+   }
+}
+void print(Node* &tail){
+	Node* temp=tail;
+	if(tail == NULL)
+	{
+		cout<<"List is empty";
+		return;
+	}
+	do{
+		cout<<tail->data<<" ";
+		tail=tail->next;
+	}while(tail != temp);
+	
+	cout<<endl;
+	
+	
+}
+
+int main()
+{
+	Node* tail=NULL;
+	insertnode(tail,1,5);
+	print(tail);
+//	insertnode(tail,5,2);
+//	print(tail);
+	deleteNode(tail,5);
+	print(tail);
+	
+}
